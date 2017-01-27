@@ -2,7 +2,7 @@
 let checkSequence = (arr) => {
     let pairs = 0;
     const iter = (list) => {
-      if (list.length === 0) return pairs;
+      if (!list.length) return pairs;
       const newList = list.reduce((prev, item, i) => {
         if (
             `${prev}${item}` === '<>' ||
@@ -41,20 +41,20 @@ const checkSyntax = (str, excludedBrackets = []) => {
     bracketsList.delete(item);
   }) : null;
   let sortedStr = str.split('').filter(char => bracketsList.has(char));
-  return sortedStr.length / checkSequence(sortedStr) !== 2 ? 1 : 0;
+  return !sortedStr.length ? 0 : sortedStr.length / checkSequence(sortedStr) !== 2 ? 1 : 0;
 }
 
-//console.log (checkSyntax ("---()[{{{{{{}}}}}}](){----") === 1);
-//console.log (checkSyntax ("") === 0);
-//console.log (checkSyntax ("before ( middle []) after ") === 0);
+console.log (checkSyntax ("---()[{{{{{{}}}}}}](){----") === 1);
+console.log (checkSyntax ("") === 0);
+console.log (checkSyntax ("before ( middle []) after ") === 0);
 console.log (checkSyntax ("( {} [] <> ){(((])))}") === 1);
-//console.log (checkSyntax (") (", ['(']) === 0);
-//console.log (checkSyntax ("} {") === 1);
-//console.log (checkSyntax ("} {", ['{']) === 0);
-//console.log (checkSyntax ("<(   >)") === 1);
-//console.log (checkSyntax ("<(   >)", ['(']) === 0);
-//console.log (checkSyntax ("(  [  <>  ()  ]  <>  )") === 0);
-//console.log (checkSyntax ("(  [  <>  ()  ]  <>  )", ['<', '[', '(']) === 0);
-//console.log (checkSyntax ("   (      [)") === 1);
-//console.log (checkSyntax ("   (      [)", ['[']) === 0);
+console.log (checkSyntax (") (", ['(']) === 0);
+console.log (checkSyntax ("} {") === 1);
+console.log (checkSyntax ("} {", ['{']) === 0);
+console.log (checkSyntax ("<(   >)") === 1);
+console.log (checkSyntax ("<(   >)", ['(']) === 0);
+console.log (checkSyntax ("(  [  <[]>  ()  ]  <>  )") === 0);
+console.log (checkSyntax ("(  [  <>  ()  ]  <>  )", ['<', '[', '(']) === 0);
+console.log (checkSyntax ("   (      [)") === 1);
+console.log (checkSyntax ("   (      [)", ['[']) === 0);
 
