@@ -43,15 +43,18 @@ const sortBracketsStr = (str, excludedBrackets = []) => {
 }
 
 const checkSyntax = (str, excludedBrackets = []) => {
-  let sortedArr = compose(arr => arr, sortBracketsStr)(str, excludedBrackets);
-  let pairs = checkSequence(sortedArr);
-  let arrLen = sortedArr.length;
+  let arrLen;
+  let result = compose(arr => (f) => {
+    arrLen = arr.length
+    return f(arr);
+  }, sortBracketsStr)(str, excludedBrackets);
+  let pairs = result(checkSequence);
   if(!arrLen) return 0;
   return arrLen / pairs === 2 ? 0 : 1;
 }
 
 console.log (checkSyntax ("---()[][]----") === 0);
-console.log (checkSyntax ("") === 0);
+console.log (checkSyntax ("(") === 1);
 console.log (checkSyntax ("[]{}{}((()))") === 0);
 console.log (checkSyntax ("before ( middle []) after ") === 0);
 console.log (checkSyntax ("( {} [] <> ){(((])))}") === 1);
