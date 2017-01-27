@@ -1,9 +1,10 @@
 'use strict';
+let compose = (f, g) => (str, ex) => f(g(str, ex));
 let checkSequence = (arr) => {
     let pairs = 0;
     const iter = (list) => {
       if (!list.length) return pairs;
-      const newList = list.reduce((prev, item, i) => {
+      return list.reduce((prev, item, i) => {
         if (
             `${prev}${item}` === '<>' ||
             `${prev}${item}` === '[]' ||
@@ -12,40 +13,46 @@ let checkSequence = (arr) => {
         ) {
           ++pairs;
           list.splice(--i, 2);
-          return iter(list, 0);
+          iter(list);
         }
         return item;
       });
-
-      return pairs;
     }
-
-    return iter(arr);
+    iter(arr);
+    return pairs;
 }
-
-const checkSyntax = (str, excludedBrackets = []) => {
+const sortBracketsStr = (str, excludedBrackets = []) => {
   let bracketsList = new Map(
       [
-       ['(', {car: ')', cdr: '('}],
-       [')', {car: '(', cdr: ')'}],
-       ['[', {car: ']', cdr: '['}],
-       [']', {car: '[', cdr: ']'}],
-       ['{', {car: '}', cdr: '{'}],
-       ['}', {car: '{', cdr: '}'}],
-       ['<', {car: '>', cdr: '<'}],
-       ['>', {car: '<', cdr: '>'}],
+        ['(', {car: ')', cdr: '('}],
+        [')', {car: '(', cdr: ')'}],
+        ['[', {car: ']', cdr: '['}],
+        [']', {car: '[', cdr: ']'}],
+        ['{', {car: '}', cdr: '{'}],
+        ['}', {car: '{', cdr: '}'}],
+        ['<', {car: '>', cdr: '<'}],
+        ['>', {car: '<', cdr: '>'}],
       ]
   );
   excludedBrackets.length > 0 ? excludedBrackets.forEach(item => {
     bracketsList.delete(bracketsList.get(item).car);
     bracketsList.delete(item);
   }) : null;
-  let sortedStr = str.split('').filter(char => bracketsList.has(char));
-  return !sortedStr.length ? 0 : sortedStr.length / checkSequence(sortedStr) !== 2 ? 1 : 0;
+
+  return str.split('').filter(char => bracketsList.has(char));
 }
 
-console.log (checkSyntax ("---()[{{{{{{}}}}}}](){----") === 1);
+const checkSyntax = (str, excludedBrackets = []) => {
+  let sortedArr = compose(arr => arr, sortBracketsStr)(str, excludedBrackets);
+  let pairs = checkSequence(sortedArr);
+  let arrLen = sortedArr.length;
+  if(!arrLen) return 0;
+  return arrLen / pairs === 2 ? 0 : 1;
+}
+
+console.log (checkSyntax ("---()[][]----") === 0);
 console.log (checkSyntax ("") === 0);
+console.log (checkSyntax ("[]{}{}((()))") === 0);
 console.log (checkSyntax ("before ( middle []) after ") === 0);
 console.log (checkSyntax ("( {} [] <> ){(((])))}") === 1);
 console.log (checkSyntax (") (", ['(']) === 0);
