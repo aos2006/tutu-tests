@@ -1,0 +1,1 @@
+const gulp = require('gulp'),  l = require('gulp-load-plugins')(),  combine = require('stream-combiner2').obj;module.exports = function(options){  return function () {    return combine(      gulp.src(options.src),      // l.newer('build/index.html'),      l.rigger(),      gulp.dest('build/'),      l.debug({title: 'include html'})    )  }};

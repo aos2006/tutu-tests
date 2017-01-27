@@ -1,0 +1,1 @@
+const gulp = require('gulp'),  l = require('gulp-load-plugins')(),  browser_sync = require('browser-sync');module.exports = function(){  return function () {      browser_sync.init({        server: 'build'      }),   browser_sync.watch('build/**/*.*').on('change', browser_sync.reload).on('error', l.notify.onError());  }};

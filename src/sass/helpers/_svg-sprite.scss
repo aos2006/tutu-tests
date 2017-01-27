@@ -1,0 +1,18 @@
+%svg-common {
+	background: url("../img/svg-sprite.svg") no-repeat;
+}
+
+@mixin icon-arrow-go-beta {
+	@extend %svg-common;
+	background-position: 0 0;
+	width: 88px;
+	height: 88px;
+}
+
+@mixin icon-logo_svg {
+	@extend %svg-common;
+	background-position: 0 100%;
+	width: 293px;
+	height: 356px;
+}
+

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Gulp SVG Symbols test page</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <style type="text/css">
+      html {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        background: #ecf4f8;
+        text-align: center;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        margin: 0 0 1em;
+        padding: 1em;
+        background: white;
+      }
+      main {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      main::after {
+        content: '';
+        flex-grow: 100;
+      }
+      p {
+        margin: 0;
+        padding: 0 0 .5em;
+      }
+      .icon,
+      .icon-wrapper {
+        background: white;
+        margin: .5em;
+        padding: 1em;
+        border-radius: .5em;
+      }
+      .icon {
+        display: inline-block;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        padding-bottom: 0;
+        min-width: 8em;
+      }
+      .icon-wrapper {
+        background-color: #fafafa;
+        background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc),
+        linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);
+        background-size:30px 30px;
+        background-position:0 0, 15px 15px;
+        margin: auto;
+      }
+      .icon-action {
+        margin: 1em -1em 0;
+        border-top: 1px solid #eee;
+        display: flex;
+      }
+      .icon-action > * {
+        flex-grow: 1;
+      }
+
+      button {
+        font: inherit;
+        background: none;
+        border: 0;
+        outline: 0;
+      }
+      button,
+      label {
+        padding: 1em .5em;
+        flex-basis: 50%;
+        cursor: pointer;
+      }
+      button:hover,
+      label:hover {
+        color: mediumVioletRed;
+      }
+      label {
+        border-left: 1px solid #eee;
+      }
+      input[type=checkbox] {
+        display: none;
+      }
+      /* can't display none: copy won't work */
+      pre {
+        text-align: left;
+        position: absolute;
+        opacity: 0;
+        z-index: 2;
+        padding: 1em;
+        pointer-events: none;
+        border-top: 1px solid #eee;
+        margin: 0 -1em;
+        width: 0;
+      }
+      input:checked ~ .icon-action label {
+        background: #eee;
+      }
+      input:checked ~ pre {
+        position: static;
+        pointer-events: auto;
+        opacity: 1;
+        width: 100%;
+      }
+    </style>
+    <style type="text/css">
+      .icon-devices-mail {
+        width: 2.188em;
+        height: 1.625em;
+      }
+      .cls-1 { fill: #fff; fill-rule: evenodd; }
+
+      .icon-devices-telegram {
+        width: 2.5em;
+        height: 2.188em;
+      }
+      .cls-1 { fill: #1b1b1b; fill-rule: evenodd; filter: url(#filter); }
+
+      .icon-devices-whatsapp {
+        width: 2.313em;
+        height: 2.375em;
+      }
+      .cls-1 { fill: #1b1b1b; fill-rule: evenodd; filter: url(#filter); }
+
+      .icon-social-mail {
+        width: 2.5em;
+        height: 2.563em;
+      }
+      .cls-1 { fill: #838383; filter: url(#filter); }
+.cls-2 { fill: #fff; fill-rule: evenodd; }
+
+      .icon-telegram {
+        width: 2.438em;
+        height: 2.438em;
+      }
+      .cls-1 { fill: #2ca5e0; filter: url(#filter); }
+.cls-2 { fill: #1b1b1b; fill-rule: evenodd; filter: url(#filter-2); }
+
+      .icon-whatsapp {
+        width: 2.5em;
+        height: 2.563em;
+      }
+      .cls-1 { fill: #65bc54; filter: url(#filter); }
+.cls-2 { fill: #1b1b1b; fill-rule: evenodd; filter: url(#filter-2); }
+
+      
+    </style>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter id="filter" x="261.031" y="32.813" width="40.063" height="35" filterUnits="userSpaceOnUse"> <feFlood result="flood" flood-color="#fff"/> <feComposite result="composite" operator="in" in2="SourceGraphic"/> <feBlend result="blend" in2="SourceGraphic"/> </filter> 
+  <filter id="filter" x="368.688" y="30" width="37.437" height="38.031" filterUnits="userSpaceOnUse"> <feFlood result="flood" flood-color="#fff"/> <feComposite result="composite" operator="in" in2="SourceGraphic"/> <feBlend result="blend" in2="SourceGraphic"/> </filter> 
+  <filter id="filter" x="0" y="0" width="40.469" height="41" filterUnits="userSpaceOnUse"> <feImage preserveAspectRatio="none" x="0" y="0" width="40.469" height="41" result="image" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNDAuNDY5IiBoZWlnaHQ9IjQxIiB2aWV3Qm94PSIwIDAgNDAuNDY5IDQxIj4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBvcGFjaXR5OiAwLjQzOwogICAgICAgIGZpbGw6IHVybCgjbGluZWFyLWdyYWRpZW50KTsKICAgICAgfQogICAgPC9zdHlsZT4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0ibGluZWFyLWdyYWRpZW50IiB4MT0iMjAuMjM0IiB5MT0iNDEiIHgyPSIyMC4yMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTgxODE5Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNDAuNDY5IiBoZWlnaHQ9IjQxIi8+Cjwvc3ZnPgo="/> <feComposite result="composite" operator="in" in2="SourceGraphic"/> <feBlend result="blend" mode="overlay" in2="SourceGraphic"/> </filter> 
+  <filter id="filter" x="0" y="0" width="39.031" height="39.562" filterUnits="userSpaceOnUse"> <feImage preserveAspectRatio="none" x="0" y="0" width="39.031" height="39.562" result="image" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzkuMDMxIiBoZWlnaHQ9IjM5LjU2MiIgdmlld0JveD0iMCAwIDM5LjAzMSAzOS41NjIiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIG9wYWNpdHk6IDAuNDM7CiAgICAgICAgZmlsbDogdXJsKCNsaW5lYXItZ3JhZGllbnQpOwogICAgICB9CiAgICA8L3N0eWxlPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIxOS41MTYiIHkxPSIzOS41NjIiIHgyPSIxOS41MTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTgxODE5Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iMzkuMDMxIiBoZWlnaHQ9IjM5LjU2MiIvPgo8L3N2Zz4K"/> <feComposite result="composite" operator="in" in2="SourceGraphic"/> <feBlend result="blend" mode="overlay" in2="SourceGraphic"/> </filter> <filter id="filter-2" x="82.656" y="347.781" width="24.719" height="21.563" filterUnits="userSpaceOnUse"> <feFlood result="flood" flood-color="#fff"/> <feComposite result="composite" operator="in" in2="SourceGraphic"/> <feBlend result="blend" in2="SourceGraphic"/> </filter> 
+  <filter id="filter" x="0" y="0" width="40.5" height="41" filterUnits="userSpaceOnUse"> <feImage preserveAspectRatio="none" x="0" y="0" width="40.5" height="41" result="image" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNDAuNSIgaGVpZ2h0PSI0MSIgdmlld0JveD0iMCAwIDQwLjUgNDEiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIG9wYWNpdHk6IDAuNDM7CiAgICAgICAgZmlsbDogdXJsKCNsaW5lYXItZ3JhZGllbnQpOwogICAgICB9CiAgICA8L3N0eWxlPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIyMC4yNSIgeTE9IjQxIiB4Mj0iMjAuMjUiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTgxODE5Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNDAuNSIgaGVpZ2h0PSI0MSIvPgo8L3N2Zz4K"/> <feComposite result="composite" operator="in" in2="SourceGraphic"/> <feBlend result="blend" mode="overlay" in2="SourceGraphic"/> </filter> <filter id="filter-2" x="378.156" y="815.062" width="23.125" height="23.407" filterUnits="userSpaceOnUse"> <feFlood result="flood" flood-color="#fff"/> <feComposite result="composite" operator="in" in2="SourceGraphic"/> <feBlend result="blend" in2="SourceGraphic"/> </filter> 
+    </defs>
+    
+    <symbol id="icon-devices-mail" viewBox="0 0 35.125 26.156">
+        <path class="cls-1" d="M474.338,37.117h30.25a2.516,2.516,0,0,1,2.429,2.593V60.673a2.515,2.515,0,0,1-2.429,2.594h-30.25a2.514,2.514,0,0,1-2.428-2.594V39.495A2.33,2.33,0,0,1,474.338,37.117Zm29.753,3.076L491.031,49A3.341,3.341,0,0,1,488,49c-1.478-.846-13.161-8.81-13.161-8.81h29.256Zm-16.6,12.376s1.5,1.3,4.249-.216,12.352-7.545,12.352-7.545V58.652s0.521,1.538-1.463,1.538H476.3s-1.463.775-1.463-1.538V44.809Z" transform="translate(-471.906 -37.125)"/> 
+    </symbol>
+    <symbol id="icon-devices-telegram" viewBox="0 0 40.063 35">
+        <path id="n" class="cls-1" d="M262.374,46.626L298.68,33s2.866-1.284,2.312,2.929-5.578,29.762-5.578,29.762-0.827,3.52-3.491,1.54c-2.6-1.933-8.318-7.529-8.318-7.529l-5.721,5.411s-2.725,2.155-3.557-2.241c-0.575-3.041-1.546-7.924-1.546-7.924l-9.875-4.466S259.044,48.74,262.374,46.626Zm4.221,1.982,30.886-11.49-4.6,25.753-9.279-7.924-6.185,6.339-1.546-9.509Z" transform="translate(-261.031 -32.813)"/> 
+    </symbol>
+    <symbol id="icon-devices-whatsapp" viewBox="0 0 37.437 38.031">
+        <path id="n" class="cls-1" d="M387.529,29.985a18.886,18.886,0,0,1,0,37.767,18.282,18.282,0,0,1-8.511-2.09c-0.247-.13-0.733-0.406-0.733-0.406l-9.612,2.765,2.84-9.556s-0.288-.509-0.423-0.769a19.04,19.04,0,0,1-2.153-8.828A18.74,18.74,0,0,1,387.529,29.985Zm0,3.091a15.794,15.794,0,0,1,0,31.585,15.285,15.285,0,0,1-7.964-2.227c-0.2-.119-0.584-0.372-0.584-0.372L373.3,63.451l1.448-5.581s-0.238-.355-0.351-0.536a15.892,15.892,0,0,1-2.42-8.465A15.671,15.671,0,0,1,387.529,33.077ZM380.45,40.2s-4.483,3.12-.53,9a20.294,20.294,0,0,0,9,7.662c2.17,0.776,6.011,1.854,7.675-.941l0.265-2.285s0.27-.329-0.53-0.807-3.572-1.747-3.572-1.747a0.6,0.6,0,0,0-.927.27,22.173,22.173,0,0,1-1.455,1.881s0.109,0.58-.794.269-4.9-2.47-6.484-5.645c0,0-.3-0.254.132-0.941l1.059-1.344a1.273,1.273,0,0,0,.132-1.209c-0.246-.776-1.852-3.9-1.852-3.9a0.819,0.819,0,0,0-.662-0.4A10.736,10.736,0,0,0,380.45,40.2Z" transform="translate(-368.688 -30)"/> 
+    </symbol>
+    <symbol id="icon-social-mail" viewBox="0 0 40.469 41">
+        <circle id="Ellipse_9_copy" data-name="Ellipse 9 copy" class="cls-1" cx="20.234" cy="20.5" r="20.234"/> <path class="cls-2" fill-rule="evenodd" d="M214.421,350.446H233.1a1.552,1.552,0,0,1,1.5,1.6v12.912a1.551,1.551,0,0,1-1.5,1.6H214.421a1.55,1.55,0,0,1-1.5-1.6V351.911A1.438,1.438,0,0,1,214.421,350.446Zm18.376,1.895-8.066,5.427a2.072,2.072,0,0,1-1.875,0c-0.913-.522-8.128-5.427-8.128-5.427H232.8Zm-10.253,7.623s0.929,0.8,2.624-.133,7.629-4.647,7.629-4.647v8.527s0.322,0.947-.9.947H215.631s-0.9.478-.9-0.947v-8.527Z" transform="translate(-203.531 -338)"/> 
+    </symbol>
+    <symbol id="icon-telegram" viewBox="0 0 39.031 39.562">
+        <ellipse class="cls-1" cx="19.516" cy="19.781" rx="19.516" ry="19.781"/> <path id="n" fill-rule="evenodd" class="cls-2" d="M83.5,356.3l22.424-8.393s1.77-.791,1.427,1.8-3.444,18.332-3.444,18.332-0.511,2.168-2.157.949c-1.607-1.191-5.137-4.638-5.137-4.638l-3.534,3.333s-1.683,1.328-2.2-1.381c-0.356-1.873-.955-4.881-0.955-4.881l-6.1-2.75S81.448,357.605,83.5,356.3Zm2.607,1.221,19.076-7.078-2.839,15.863-5.731-4.881-3.82,3.905-0.955-5.857Z" transform="translate(-77 -338.719)"/> 
+    </symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 40.5 41">
+        <circle class="cls-1" cx="20.25" cy="20.5" r="20.25"/> <path id="n" fill-rule="evenodd" class="cls-2" d="M389.805,815.054a11.632,11.632,0,0,1,0,23.262,11.314,11.314,0,0,1-5.257-1.287c-0.153-.08-0.453-0.25-0.453-0.25l-5.937,1.7,1.755-5.886s-0.178-.314-0.262-0.474a11.708,11.708,0,0,1-1.329-5.437A11.557,11.557,0,0,1,389.805,815.054Zm0,1.9a9.728,9.728,0,0,1,0,19.455,9.463,9.463,0,0,1-4.919-1.371c-0.122-.074-0.361-0.229-0.361-0.229l-3.506.855,0.894-3.438s-0.147-.218-0.217-0.33a9.778,9.778,0,0,1-1.494-5.214A9.666,9.666,0,0,1,389.805,816.957Zm-4.373,4.388s-2.769,1.922-.327,5.546a12.524,12.524,0,0,0,5.558,4.72c1.34,0.478,3.712,1.141,4.74-.58l0.163-1.407s0.167-.2-0.327-0.5-2.206-1.077-2.206-1.077a0.371,0.371,0,0,0-.572.167,13.6,13.6,0,0,1-.9,1.158s0.067,0.358-.491.166a8.711,8.711,0,0,1-4-3.477s-0.188-.156.081-0.58l0.654-.828a0.782,0.782,0,0,0,.082-0.744c-0.152-.478-1.144-2.4-1.144-2.4a0.506,0.506,0,0,0-.409-0.248A6.635,6.635,0,0,0,385.432,821.345Z" transform="translate(-368.75 -807)"/> 
+    </symbol></svg>
+    <h1>Gulp SVG Symbols demo page</h1>
+    <main>
+      <div class="icon">
+        <p>#icon-devices-mail</p>
+        <div class="icon-wrapper">
+          <svg role="img" class="icon-devices-mail">
+            <use xlink:href="#icon-devices-mail"/>
+          </svg>
+        </div>
+        <div class="icon-dev">
+          <input class="show-code" id="toggle-icon-devices-mail" type="checkbox"/>
+          <div class="icon-action">
+            <button onclick="gulpSvgSymbol.copy(&apos;code-icon-devices-mail&apos;)">Copy</button>
+            <label onclick="gulpSvgSymbol.reflow(&apos;code-icon-devices-mail&apos;)" for="toggle-icon-devices-mail">Show</label>
+          </div>
+<pre>
+<code id="code-icon-devices-mail">&lt;svg role=&quot;img&quot; class=&quot;icon-devices-mail&quot;&gt;
+  &lt;use xlink:href=&quot;#icon-devices-mail&quot;&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
+</pre>
+        </div>
+      </div>
+      <div class="icon">
+        <p>#icon-devices-telegram</p>
+        <div class="icon-wrapper">
+          <svg role="img" class="icon-devices-telegram">
+            <use xlink:href="#icon-devices-telegram"/>
+          </svg>
+        </div>
+        <div class="icon-dev">
+          <input class="show-code" id="toggle-icon-devices-telegram" type="checkbox"/>
+          <div class="icon-action">
+            <button onclick="gulpSvgSymbol.copy(&apos;code-icon-devices-telegram&apos;)">Copy</button>
+            <label onclick="gulpSvgSymbol.reflow(&apos;code-icon-devices-telegram&apos;)" for="toggle-icon-devices-telegram">Show</label>
+          </div>
+<pre>
+<code id="code-icon-devices-telegram">&lt;svg role=&quot;img&quot; class=&quot;icon-devices-telegram&quot;&gt;
+  &lt;use xlink:href=&quot;#icon-devices-telegram&quot;&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
+</pre>
+        </div>
+      </div>
+      <div class="icon">
+        <p>#icon-devices-whatsapp</p>
+        <div class="icon-wrapper">
+          <svg role="img" class="icon-devices-whatsapp">
+            <use xlink:href="#icon-devices-whatsapp"/>
+          </svg>
+        </div>
+        <div class="icon-dev">
+          <input class="show-code" id="toggle-icon-devices-whatsapp" type="checkbox"/>
+          <div class="icon-action">
+            <button onclick="gulpSvgSymbol.copy(&apos;code-icon-devices-whatsapp&apos;)">Copy</button>
+            <label onclick="gulpSvgSymbol.reflow(&apos;code-icon-devices-whatsapp&apos;)" for="toggle-icon-devices-whatsapp">Show</label>
+          </div>
+<pre>
+<code id="code-icon-devices-whatsapp">&lt;svg role=&quot;img&quot; class=&quot;icon-devices-whatsapp&quot;&gt;
+  &lt;use xlink:href=&quot;#icon-devices-whatsapp&quot;&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
+</pre>
+        </div>
+      </div>
+      <div class="icon">
+        <p>#icon-social-mail</p>
+        <div class="icon-wrapper">
+          <svg role="img" class="icon-social-mail">
+            <use xlink:href="#icon-social-mail"/>
+          </svg>
+        </div>
+        <div class="icon-dev">
+          <input class="show-code" id="toggle-icon-social-mail" type="checkbox"/>
+          <div class="icon-action">
+            <button onclick="gulpSvgSymbol.copy(&apos;code-icon-social-mail&apos;)">Copy</button>
+            <label onclick="gulpSvgSymbol.reflow(&apos;code-icon-social-mail&apos;)" for="toggle-icon-social-mail">Show</label>
+          </div>
+<pre>
+<code id="code-icon-social-mail">&lt;svg role=&quot;img&quot; class=&quot;icon-social-mail&quot;&gt;
+  &lt;use xlink:href=&quot;#icon-social-mail&quot;&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
+</pre>
+        </div>
+      </div>
+      <div class="icon">
+        <p>#icon-telegram</p>
+        <div class="icon-wrapper">
+          <svg role="img" class="icon-telegram">
+            <use xlink:href="#icon-telegram"/>
+          </svg>
+        </div>
+        <div class="icon-dev">
+          <input class="show-code" id="toggle-icon-telegram" type="checkbox"/>
+          <div class="icon-action">
+            <button onclick="gulpSvgSymbol.copy(&apos;code-icon-telegram&apos;)">Copy</button>
+            <label onclick="gulpSvgSymbol.reflow(&apos;code-icon-telegram&apos;)" for="toggle-icon-telegram">Show</label>
+          </div>
+<pre>
+<code id="code-icon-telegram">&lt;svg role=&quot;img&quot; class=&quot;icon-telegram&quot;&gt;
+  &lt;use xlink:href=&quot;#icon-telegram&quot;&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
+</pre>
+        </div>
+      </div>
+      <div class="icon">
+        <p>#icon-whatsapp</p>
+        <div class="icon-wrapper">
+          <svg role="img" class="icon-whatsapp">
+            <use xlink:href="#icon-whatsapp"/>
+          </svg>
+        </div>
+        <div class="icon-dev">
+          <input class="show-code" id="toggle-icon-whatsapp" type="checkbox"/>
+          <div class="icon-action">
+            <button onclick="gulpSvgSymbol.copy(&apos;code-icon-whatsapp&apos;)">Copy</button>
+            <label onclick="gulpSvgSymbol.reflow(&apos;code-icon-whatsapp&apos;)" for="toggle-icon-whatsapp">Show</label>
+          </div>
+<pre>
+<code id="code-icon-whatsapp">&lt;svg role=&quot;img&quot; class=&quot;icon-whatsapp&quot;&gt;
+  &lt;use xlink:href=&quot;#icon-whatsapp&quot;&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
+</pre>
+        </div>
+      </div>
+    </main>
+    <script type="text/javascript">
+      (function () {
+        // https://developers.google.com/web/updates/2015/04/cut-and-copy-commands
+        var symb = window.gulpSvgSymbol = {};
+        var main = document.getElementsByTagName('main')[0];
+        symb.copy = function (id) {
+          window.getSelection().removeAllRanges();
+          var code = document.getElementById(id);
+          var range = document.createRange();
+          range.selectNode(code);
+          window.getSelection().addRange(range);
+          try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+          } catch(err) {
+            console.log('Oops, unable to copy');
+          }
+          window.getSelection().removeAllRanges();
+        }
+        // Force a reflow so sizes are back to initials…
+        symb.reflow = function (id) {
+          var code = document.getElementById(id);
+          code.style.display = 'none';
+          window.setTimeout(function () {
+            code.style.display = '';
+          }, 0);
+        }
+      }());
+    </script>
+  </body>
+</html>

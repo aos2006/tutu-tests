@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="39.031" height="39.562" viewBox="0 0 39.031 39.562">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2ca5e0;
+        filter: url(#filter);
+      }
+
+      .cls-2 {
+        fill: #1b1b1b;
+        fill-rule: evenodd;
+        filter: url(#filter-2);
+      }
+    </style>
+    <filter id="filter" x="0" y="0" width="39.031" height="39.562" filterUnits="userSpaceOnUse">
+      <feImage preserveAspectRatio="none" x="0" y="0" width="39.031" height="39.562" result="image" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzkuMDMxIiBoZWlnaHQ9IjM5LjU2MiIgdmlld0JveD0iMCAwIDM5LjAzMSAzOS41NjIiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIG9wYWNpdHk6IDAuNDM7CiAgICAgICAgZmlsbDogdXJsKCNsaW5lYXItZ3JhZGllbnQpOwogICAgICB9CiAgICA8L3N0eWxlPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIxOS41MTYiIHkxPSIzOS41NjIiIHgyPSIxOS41MTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTgxODE5Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iMzkuMDMxIiBoZWlnaHQ9IjM5LjU2MiIvPgo8L3N2Zz4K"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" mode="overlay" in2="SourceGraphic"/>
+    </filter>
+    <filter id="filter-2" x="82.656" y="347.781" width="24.719" height="21.563" filterUnits="userSpaceOnUse">
+      <feFlood result="flood" flood-color="#fff"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <ellipse class="cls-1" cx="19.516" cy="19.781" rx="19.516" ry="19.781" fill="#2ca5e0"/>
+  <path id="n" fill="#1b1b1b" fill-rule="evenodd" class="cls-2" d="M83.5,356.3l22.424-8.393s1.77-.791,1.427,1.8-3.444,18.332-3.444,18.332-0.511,2.168-2.157.949c-1.607-1.191-5.137-4.638-5.137-4.638l-3.534,3.333s-1.683,1.328-2.2-1.381c-0.356-1.873-.955-4.881-0.955-4.881l-6.1-2.75S81.448,357.605,83.5,356.3Zm2.607,1.221,19.076-7.078-2.839,15.863-5.731-4.881-3.82,3.905-0.955-5.857Z" transform="translate(-77 -338.719)"/>
+</svg>

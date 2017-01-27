@@ -1,0 +1,8 @@
+<% _.forEach( icons, function( icon ){ %><%= icon.className %> {
+  fill: inherit;
+  stroke: inherit;
+  width: <%= icon.width %>;
+  height: <%= icon.height %>;
+}
+<%= icon.style %>
+<% }); %>
