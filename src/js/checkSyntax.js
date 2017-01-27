@@ -1,30 +1,26 @@
 'use strict';
 let checkSequence = (arr) => {
+    let pairs = 0;
     const iter = (list) => {
-      if (list.length === 0) return 0;
-      if (list.length === 1) return 1;
+      if (list.length === 0) return pairs;
       const newList = list.reduce((prev, item, i) => {
         if (
-            prev + item === '<>' ||
-            prev + item === '[]' ||
-            prev + item === '{}' ||
-            prev + item === '()'
+            `${prev}${item}` === '<>' ||
+            `${prev}${item}` === '[]' ||
+            `${prev}${item}` === '{}' ||
+            `${prev}${item}` === '()'
         ) {
-          if (list.length === 2) {
-            list.splice(0, 2);
-            return list;
-          }
-          list.splice(i - 1, 2)
-          return list;
+          ++pairs;
+          list.splice(--i, 2);
+          return iter(list, 0);
         }
-
         return item;
-      }, list[0]);
+      });
 
-      return iter(newList);
+      return pairs;
     }
 
-    return iter(arr)
+    return iter(arr);
 }
 
 const checkSyntax = (str, excludedBrackets = []) => {
@@ -45,20 +41,20 @@ const checkSyntax = (str, excludedBrackets = []) => {
     bracketsList.delete(item);
   }) : null;
   let sortedStr = str.split('').filter(char => bracketsList.has(char));
-  return checkSequence(sortedStr);
+  return sortedStr.length / checkSequence(sortedStr) !== 2 ? 1 : 0;
 }
 
-console.log (checkSyntax ("---(++++)----") === 0);
-console.log (checkSyntax ("") === 0);
-console.log (checkSyntax ("before ( middle []) after ") === 0);
-console.log (checkSyntax (") (") === 1);
-console.log (checkSyntax (") (", ['(']) === 0);
-console.log (checkSyntax ("} {") === 1);
-console.log (checkSyntax ("} {", ['{']) === 0);
-console.log (checkSyntax ("<(   >)") === 1);
-console.log (checkSyntax ("<(   >)", ['(']) === 0);
-console.log (checkSyntax ("(  [  <>  ()  ]  <>  )") === 0);
-console.log (checkSyntax ("(  [  <>  ()  ]  <>  )", ['<', '[', '(']) === 0);
-console.log (checkSyntax ("   (      [)") === 1);
-console.log (checkSyntax ("   (      [)", ['[']) === 0);
+//console.log (checkSyntax ("---()[{{{{{{}}}}}}](){----") === 1);
+//console.log (checkSyntax ("") === 0);
+//console.log (checkSyntax ("before ( middle []) after ") === 0);
+console.log (checkSyntax ("( {} [] <> ){(((])))}") === 1);
+//console.log (checkSyntax (") (", ['(']) === 0);
+//console.log (checkSyntax ("} {") === 1);
+//console.log (checkSyntax ("} {", ['{']) === 0);
+//console.log (checkSyntax ("<(   >)") === 1);
+//console.log (checkSyntax ("<(   >)", ['(']) === 0);
+//console.log (checkSyntax ("(  [  <>  ()  ]  <>  )") === 0);
+//console.log (checkSyntax ("(  [  <>  ()  ]  <>  )", ['<', '[', '(']) === 0);
+//console.log (checkSyntax ("   (      [)") === 1);
+//console.log (checkSyntax ("   (      [)", ['[']) === 0);
 
