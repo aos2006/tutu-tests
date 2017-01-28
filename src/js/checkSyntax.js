@@ -30,12 +30,12 @@ var checkSyntax = (str) => {
   const newStr = getOnlyBrackets(str);
   return areBracketsInOrder(newStr) ? 0 : 1;
 };
-console.log (checkSyntax("---((++++))----") === 0);
-console.log (checkSyntax ("") === 0);
-console.log (checkSyntax ("before ( middle []) after ") === 0);
-console.log (checkSyntax (") (") === 1);
-console.log (checkSyntax ("} {") === 1);
-console.log (checkSyntax ("<>(])") === 1);
-console.log (checkSyntax ("(  [  <>  ()  ]  <>  )") === 0);
-console.log (checkSyntax ("   (      [)") === 1);
+//console.log (checkSyntax("---((((((()))))))----") === 0);
+//console.log (checkSyntax ("") === 0);
+//console.log (checkSyntax ("before ( middle []) after ") === 0);
+//console.log (checkSyntax (") (") === 1);
+//console.log (checkSyntax ("} {") === 1);
+//console.log (checkSyntax ("<>(])") === 1);
+//console.log (checkSyntax ("(  [  <>  ()  ]  <>  )") === 0);
+//console.log (checkSyntax ("   (      [)") === 1);
 
