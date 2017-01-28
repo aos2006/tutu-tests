@@ -13,7 +13,7 @@ let dsCount = (...args) => {
 
 
 }
-
+console.log('dsCount');
 try {
   test(dsCount, ['ab___ab__', 'a', 'b'], 2);
   test(dsCount, ['___cd____', 'c', 'd'], 1);
