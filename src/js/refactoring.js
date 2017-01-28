@@ -53,31 +53,20 @@ console.log(
 
 
 //Задача 2
-const drawRating = (vote, range = [0, 20], stars = '★☆☆☆☆') => {
-  if (vote >= range[0] && vote <= range[1]) return stars;
-  return new Error('Что то пошло не так, проверьте аргументы');
+const drawRating = (vote, range = [0, 20, 40, 60, 80, 100], stars = '★☆☆☆☆') => {
+  let returnedValue;
+  for (let i = 0; i < range.length - 1; i++) {
+     if (vote >= range[i] && vote <= range[i + 1]) {
+       returnedValue = stars;
+       break;
+     }
+  }
+  return returnedValue;
 }
-
-//function drawRating(vote) {
-//  if (vote >= 0 && vote <= 20) {
-//    return '★☆☆☆☆';
-//  }
-//  else if (vote > 20 && vote <= 40) {
-//    return '★★☆☆☆';
-//  }
-//  else if (vote > 40 && vote <= 60) {
-//    return '★★★☆☆';
-//  }
-//  else if (vote > 60 && vote <= 80) {
-//    return '★★★★☆';
-//  }
-//  else if (vote > 80 && vote <= 100) {
-//    return '★★★★★';
-//  }
-//}
+let range = [0, 20, 40, 60, 80, 100];
 
 // Проверка работы результата
-console.log(drawRating(0, [0, 20], '★☆☆☆☆') ); // ★☆☆☆☆
-console.log(drawRating(1, [0, 20], '★☆☆☆☆') ); // ★☆☆☆☆
-console.log(drawRating(50, [40, 60], '★★★☆☆')); // ★★★☆☆
-console.log(drawRating(99, [80, 100], '★★★★★')); // ★★★★★
+console.log(drawRating(0, range, '★☆☆☆☆') );
+console.log(drawRating(1, range, '★☆☆☆☆') );
+console.log(drawRating(50, range, '★★★☆☆'));
+console.log(drawRating(99, range, '★★★★★'));
