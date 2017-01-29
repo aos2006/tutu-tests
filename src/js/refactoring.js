@@ -54,7 +54,7 @@ console.log(
 
 //Задача 2
 const drawRating = (vote) => {
-  if (vote > 0 ) return Math.ceil(vote / 20);
+  if (vote > 0 && vote <= 100) return Math.ceil(vote / 20);
   throw new Error('Некорректное значение');
 }
 
