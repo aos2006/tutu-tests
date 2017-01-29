@@ -1,0 +1,46 @@
+.progress-bar
+  position: relative
+  &__native
+    position: absolute
+    width: 0
+    height: 0
+    overflow: hidden
+    visibility: hidden
+  &__bar
+    height: 20px
+    overflow: hidden
+    background-color: #e6e9ed
+    border-radius: 10px
+  &__line
+    overflow: hidden
+    background: #14f240
+    width: 0
+    height: 100%
+    top: 0
+    left: 0
+    transition: width 1s linear
+    &:before
+      position: absolute
+      text-align: center
+      color: #000
+      content: ''
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      line-height: 20px
+
+@for $i from 0 through 100
+  .progress-bar__native[value="#{$i}"]
+    & + .progress-bar__bar
+      & .progress-bar__line:before
+        content : '#{$i}%'
+    & ~ .progress-bar__bar .progress-bar__line
+      width: $i * 1%
+
+
+
+
+
+
+

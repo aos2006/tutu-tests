@@ -1,1 +1,7 @@
-.page-header	background-image: url('../img/information-picture/decors-img/page-header-bg.jpg')	background-size: 100% 150px	background-position: 0 0	background-repeat: no-repeat	height: 150px	+r(1051px)		position: absolute		left: 0		right: 0		background-image: none	+r(750px)		height: 100px	&--is-hidden		display: none	&__container		@include container(1051px)		background-image: url('../img/information-picture/decors-img/page-header-devider.png')		background-size: auto		background-repeat: no-repeat		background-position: 50% 48%		+r(1051px)			position: relative			background-image: none			@include container(720px)	&__left-column,	&__right-column		@include span(6 of 16)		padding-top: 20px		+r(1051px)			display: none	&__left-column &__navigation		margin-top: 32px	&__switcher		@include span(2 of 6 first)	&__contacts		@include span(4 of 6)		padding-left: 0		padding-right: 0	&__navigation		@include span(6 of 6)		margin-top: 40px	&__logo		position: relative		z-index: $z-index + 2		@include span(4 of 16)		+r(1051px)			@include span(8 of 16)			float: none			margin-left: auto			margin-right: auto	&__burger		display: none		+r(1051px)			position: absolute			z-index: $z-index + 2			text-align: right			top: 50%			transform: translateY(-50%)			right: 0			display: block			@include span(4 of 16 last)	&__mail		@include span(2 of 16 last)		& .mail-link			float: right
+.page-header
+  margin-bottom: 40px
+  &__nav
+    width: calc(784 / 1024 * 100%)
+    margin-left: auto
+    +r(1024px)
+      width: 100%

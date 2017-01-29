@@ -1,0 +1,70 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Задача 1</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/screen.css">
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="svg-sprites">
+    <svg xmlns="http://www.w3.org/2000/svg"/></div>
+<article class="components">
+    <h2 class="components__title">Задача 1 - компоненты</h2>
+    <div class="components__rating">
+        <div class="rating">
+            <input type="radio" id="star1" name="rating" value="1" class="rating__item"/>
+            <label for="star1" title="rating-1" class="rating__label"></label>
+            <input type="radio" id="star2" name="rating" value="2" class="rating__item"/>
+            <label for="star2" title="rating-2" class="rating__label"></label>
+            <input type="radio" id="star3" name="rating" value="3" class="rating__item"/>
+            <label for="star3" title="rating-3" class="rating__label"></label>
+            <input type="radio" id="star4" name="rating" value="4" class="rating__item"/>
+            <label for="star4" title="rating-4" class="rating__label"></label>
+            <input type="radio" id="star5" name="rating" value="5" class="rating__item"/>
+            <label for="star5" title="rating-5" class="rating__label"></label>
+        </div>
+    </div>
+    <div class="components__progress">
+        <div class="progress-bar">
+            <progress class="progress-bar__native" value="0" max="100"></progress>
+            <div class="progress-bar__bar">
+                <div class="progress-bar__line"></div>
+            </div>
+        </div>
+    </div>
+    <div class="components__btn">
+        <div class="btn btn--theme-red btn--size-xs" role="button">
+            Кнопка 1
+        </div>
+    </div>
+    <div class="components__btn">
+        <a class="btn btn--theme-green btn--size-md" role="button">
+            Кнопка 2
+        </a>
+    </div>
+    <div class="components__btn">
+        <button class="btn btn--theme-black btn--size-xl" role="button">
+            Кнопка 3
+        </button>
+    </div>
+    </div>
+    <div class="components__btn">
+        <input class="btn btn--theme-red btn--size-xs" role="button" value="Кнопка 4"/>
+    </div>
+
+</article>
+<script src="js/main.js"></script>
+<script>
+    setTimeout(function () {
+      var bar = document.querySelector('.progress-bar__native');
+      bar.value = 50
+    }, 1000)
+</script>
+</body>
+</html>

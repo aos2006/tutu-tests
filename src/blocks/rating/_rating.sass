@@ -1,0 +1,37 @@
+.rating
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  flex-direction: row-reverse
+  &:not(:checked)
+    & .rating__item
+      position: absolute
+      top: -9999px
+      &:checked + .rating__label:hover,
+      &:checked + a.rating__label:hover ~ .rating__label,
+      &:checked ~ .rating__label:hover,
+      &:checked ~ .rating__label ~ .rating__label
+        color: #ffb500
+    & .rating__label
+      width: 1em
+      padding: 0
+      overflow: hidden
+      white-space: nowrap
+      cursor: pointer
+      font-size: 200%
+      line-height: 1.2
+      color: #ddd
+      &:before
+        content: '★'
+        width: 100%
+    & .rating__label
+      &:hover
+        color: #ffb500
+        & ~ .rating__label
+          color: #ffb500
+  &__label
+    &:hover ~ .rating__item ~ .rating__label
+      color: #ffb500
+  &__item:checked ~ .rating__label
+    color: #ffb500
+

@@ -1,0 +1,21 @@
+.steps-list
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  justify-content: flex-start
+  &__item
+    padding: 2px 0
+    width: calc(100% / 5)
+    box-shadow: inset 0 1px 1px black
+    border-right: 1px solid #ffffff
+    background-color: #f8f8f8
+    color: #000
+    text-align: center
+    font-size: 15px
+    &--completed,
+    &--active
+      color: #fff
+    &--completed
+      background-color: #39a618
+    &--active
+      background-color: #9fd206

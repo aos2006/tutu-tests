@@ -2,7 +2,7 @@
   "name": "gulp-sass-template",
   "description": "template",
   "main": "index.js",
-  "directory": "./src/",
+  "directory": "bower_components",
   "authors": [
     "aos2006 <vashchenko-01@mail.ru>"
   ],
