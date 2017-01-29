@@ -3,6 +3,9 @@
 =r($width)
 	@media only screen and (max-width: $width)
 		@content
+=rie($width)
+	@media only screen and (max-device-width: $width)
+		@content
 
 // height
 =rh($height)
@@ -122,7 +125,7 @@
 
 =justify
 	text-align: justify
-	line-height: 0
+	line-height: 1
 	font-size: 0
 	text-justify: newspaper
 	zoom: 1

@@ -7,14 +7,14 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/screen.css">
+    <!--[if lt IE 10 ]>
+    <link rel="stylesheet" href="css/screen-ie-fallback.css">
+    <![endif]-->
 </head>
 <body>
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-<div class="svg-sprites">
-    {% include '../sprites/svg/svg-symbols.svg' %}
-</div>
 <article class="components">
     <h2 class="components__title">Задача 1 - компоненты</h2>
     <div class="components__rating">
@@ -38,6 +38,9 @@
                 <div class="progress-bar__line"></div>
             </div>
         </div>
+        <!--[if lt IE 10 ]>
+            <p>sorry your browser does not support HTML5 progress bar</p>
+        <![endif]-->
     </div>
     <div class="components__btn">
         <div class="btn btn--theme-red btn--size-xs" role="button">
@@ -56,7 +59,7 @@
     </div>
     </div>
     <div class="components__btn">
-        <input class="btn btn--theme-red btn--size-xs" role="button" value="Кнопка 4"/>
+        <input class="btn btn--theme-red btn--size-xs" role="button" value="Кнопка 4" type="button"/>
     </div>
 
 </article>

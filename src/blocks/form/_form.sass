@@ -1,41 +1,48 @@
 .form
   display: flex
+  width: 100%
   flex-wrap: wrap
   width: 100%
-  align-items: baseline
-  justify-content: flex-start
+  font-size: 0
   &__header
-    width: 100%
-    display: flex
-    align-items: center
-    justify-content: flex-end
-    margin-bottom: 20px
-    .steps-list
-      flex-grow: 1
-    +r(600px)
-      flex-direction: column
-      align-items: flex-start
-      justify-content: flex-start
-      .steps-list
-        width: 100%
-  &__title
-    margin-right: calc(12 / 784 * 100%)
-    +r(600px)
-      margin-right: 0
-      margin-bottom: 20px
-  &__descr-label
     width: 100%
     display: flex
     align-items: center
     justify-content: flex-start
     margin-bottom: 20px
+    +r(600px)
+      flex-direction: column
+  &__steps-list
+    flex-grow: 1
+    +r(600px)
+      width: 100%
+  &__title
+    display: inline-block
+    vertical-align: middle
+    margin-right: 12px
+    +r(600px)
+      margin-right: 0
+      margin-bottom: 20px
+  &__descr-label
+    display: block
+    position: relative
+    width: 100%
+    margin-bottom: 20px
     font-size: 15px
     color: lightgray
     font-weight: 400
+    & span
+      position: relative
+      z-index: 2
+      background-color: #fff
+      padding-right: 12px
     &--lined
       &:after
-        flex-grow: 1
-        margin-left: 12px
+        position: absolute
+        z-index: 1
+        top: 50%
+        left: 0
+        right: 0
         content: ''
         height: 1px
         background-color: lightgray
@@ -50,6 +57,7 @@
       margin-bottom: 40px
   &__footer
     margin-top: 40px
+    margin-bottom: 10px
     width: 100%
     +r(600px)
       margin-top: 0

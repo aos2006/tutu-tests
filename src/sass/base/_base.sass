@@ -1,33 +1,35 @@
 .content
 	max-width: 1024px
 	margin: 0 auto
-	padding: 0 15px
+	+r(1024px)
+		padding: 0 15px
 	&__i
 		display: flex
 		align-items: flex-start
 		justify-content: flex-start
-		flex-wrap: wrap
+		font-size: 0
 	&__sidebar
 		margin-right: 40px
-		width: calc(200 / 1024 * 100%)
+		width: 200px
 		+r(1024px)
 			display: none
 	&__main
-		flex-grow: 1
-		width: calc(784 / 1042 * 100%)
+		width: calc(784 / 1024 * 100%)
+		+r(1024px)
+			width: 100%
 .main
 	&__footer
-		padding: 20px 10px
-		background-color: #f2f2f2
 		display: flex
+		width: 100%
 		align-items: center
 		justify-content: space-between
-		+r(600px)
+		padding: 20px 10px
+		background-color: #f2f2f2
+		+r(370px)
 			flex-direction: column
-			align-items: center
-			justify-content: center
+			margin-right: 0
 	&__btn
-		+r(600px)
+		+r(370px)
 			margin-bottom: 20px
 			&:last-of-type
 				margin-bottom: 0
@@ -49,6 +51,7 @@ img
 	width: 100%
 	max-width: 100%
 .components
+	padding: 20px
 	&__rating
 		margin-bottom: 20px
 	&__progress
@@ -60,8 +63,16 @@ img
 		margin-bottom: 20px
 		&:last-of-type
 			margin-bottom: 0
-*
+button
 	user-select: none
+
 .page-index
 	padding-top: 15px
+
+input::-webkit-contacts-auto-fill-button
+	visibility: hidden
+	display: none !important
+	pointer-events: none
+	position: absolute
+	right: 0
 

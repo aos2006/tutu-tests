@@ -1,0 +1,32 @@
+.content
+  &__sidebar
+    display: inline-block
+    vertical-align: top
+  &__main
+    display: inline-block
+    vertical-align: top
+    width: 76.5625%
+    +r(1024px)
+      width: 100%
+  &__sidebar
+    margin-right: 40px
+    width: 200px
+    +r(1024px)
+      display: none
+.main
+  &__footer
+    display: block
+    font-size: 0
+    +justify
+    +r(450px)
+      text-align: center
+      margin-right: 0
+  &__btn
+    display: inline-block
+    vertical-align: middle
+    text-align: center
+    +r(450px)
+      margin-bottom: 20px
+      &:last-of-type
+        margin-bottom: 0
+
