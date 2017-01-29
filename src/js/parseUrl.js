@@ -1,5 +1,6 @@
 console.log('parseUrl');
 let parseUrl = (url) => {
+  if (url === '') throw new Error('Неккоректный url');
   let a = document.createElement ('a');
   a.href = url;
   return a;
