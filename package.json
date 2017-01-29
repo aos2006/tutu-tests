@@ -60,5 +60,8 @@
       "source": "./src",
       "build": "./build"
     }
+  },
+  "dependencies": {
+    "whatwg-fetch": "^2.0.2"
   }
 }

@@ -53,20 +53,12 @@ console.log(
 
 
 //Задача 2
-const drawRating = (vote, range = [0, 20, 40, 60, 80, 100], stars = '★☆☆☆☆') => {
-  let returnedValue;
-  for (let i = 0; i < range.length - 1; i++) {
-     if (vote >= range[i] && vote <= range[i + 1]) {
-       returnedValue = stars;
-       break;
-     }
-  }
-  return returnedValue;
+const drawRating = (vote) => {
+  return Math.ceil(vote / 20) > 0 ? Math.ceil(vote/20) : 1;
 }
-let range = [0, 20, 40, 60, 80, 100];
 
 // Проверка работы результата
-console.log(drawRating(0, range, '★☆☆☆☆') );
-console.log(drawRating(1, range, '★☆☆☆☆') );
-console.log(drawRating(50, range, '★★★☆☆'));
-console.log(drawRating(99, range, '★★★★★'));
+console.log(drawRating(0));
+console.log(drawRating(1) );
+console.log(drawRating(50));
+console.log(drawRating(99));
