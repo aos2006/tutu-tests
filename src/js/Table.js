@@ -2,8 +2,24 @@ import 'whatwg-fetch'
 export class Table {
   constructor(table) {
     this.grid = table;
-    this.isDownSort = true;
-    this.maxCount = 50;
+    this.maxCount = 10;
+    this.headItems = {
+      '1': {
+         isSortDown: true
+      },
+      '2': {
+        isSortDown: true
+      },
+      '3': {
+        isSortDown: true
+      },
+      '4': {
+        isSortDown: true
+      },
+      '5': {
+        isSortDown: true
+      }
+    }
     this.apiUrls = {
       smallSize: `http://www.filltext.com/?rows=${this.maxCount}&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}`,
       bigSize: `http://www.filltext.com/?rows=${this.maxCount}&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}`
@@ -17,12 +33,14 @@ export class Table {
 
   sortMethods = {
     'string': (isDown, colNum) => (rowA, rowB) => {
-      return isDown ? rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML :
-      rowA.cells[colNum].innerHTML < rowB.cells[colNum].innerHTML;
+      return isDown ?
+      rowA.cells[colNum].getAttribute('data-sort-value') > rowB.cells[colNum].getAttribute('data-sort-value') :
+      rowA.cells[colNum].getAttribute('data-sort-value') < rowB.cells[colNum].getAttribute('data-sort-value');
     },
     'number': (isDown, colNum) => (rowA, rowB) => {
-      return isDown ? rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML :
-      rowB.cells[colNum].innerHTML - rowA.cells[colNum].innerHTML;
+      return isDown ?
+      rowA.cells[colNum].getAttribute('data-sort-value') - rowB.cells[colNum].getAttribute('data-sort-value') :
+      rowB.cells[colNum].getAttribute('data-sort-value') - rowA.cells[colNum].getAttribute('data-sort-value');
     }
   }
 
@@ -48,6 +66,8 @@ export class Table {
       Object.keys(item).forEach(key => {
           let td = document.createElement('td');
           td.textContent = item[key];
+          let val = +item[key] ? item[key] : item[key].toLowerCase();
+          td.setAttribute('data-sort-value', val);
           row.appendChild(td);
       });
       tbody.appendChild(row);
@@ -57,14 +77,14 @@ export class Table {
   }
 
 
-  sortGrid = (colNum, type, isDown) => {
+  sortGrid = (colNum, type, id) => {
     let tbody = this.grid.getElementsByTagName('tbody')[0];
     let rowsArray = [].slice.call(tbody.rows);
-    rowsArray.sort(this.sortMethods[type](isDown, colNum));
-    this.grid.removeChild(tbody);
-    rowsArray.forEach(item => tbody.appendChild(item))
-    this.grid.appendChild(tbody);
-    this.isDownSort = !this.isDownSort;
+      rowsArray.sort(this.sortMethods[type](this.headItems[id].isSortDown, colNum));
+      this.grid.removeChild(tbody);
+      rowsArray.forEach(item => tbody.appendChild(item))
+      this.grid.appendChild(tbody);
+      this.headItems[id].isSortDown = !this.headItems[id].isSortDown;
 
 }
 
@@ -76,7 +96,7 @@ export class Table {
         item => {
           if (!item.classList.contains('table__cell--sort-down')) item.classList.add('table__cell--sort-down');
         });
-    this.sortGrid(ev.target.cellIndex, ev.target.getAttribute('data-type') , this.isDownSort);
+    this.sortGrid(ev.target.cellIndex, ev.target.getAttribute('data-type'), ev.target.id);
   }
 
   init(){
