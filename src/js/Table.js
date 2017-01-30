@@ -2,7 +2,7 @@ import 'whatwg-fetch'
 export class Table {
   constructor(table) {
     this.grid = table;
-    this.maxCount = 10;
+    this.maxCount = 50;
     this.headItems = {
       '1': {
          isSortDown: true
@@ -44,13 +44,18 @@ export class Table {
     }
   }
 
-  hideLoader = (elem, className) => elem.classList.toggle(className);
+  hashCode = function(str){
+    return str.split('').reduce((prevHash, currVal) =>
+    ((prevHash << 5) - prevHash) + currVal.charCodeAt(0), 0);
+  }
+
 
   getSiblings = (className, elem) => [].filter.call(document.querySelectorAll(className), item => item.id !== elem.id);
 
   run = (list, fn) => {
+    console.log(this.hashCode('Ingle'));
     try {
-      this.hideLoader(document.querySelector('.js-loader'), 'loader--show');
+      this.toggleClass(document.querySelector('.js-loader'), 'loader--show');
       fn(list);
     } catch (e) {
       this.grid.innerHTML = `<tr><td>${'Что-то пошло не так'}</td></tr>`;
