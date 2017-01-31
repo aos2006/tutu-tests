@@ -1,5 +1,8 @@
 import 'whatwg-fetch';
 import Pagination from './Pagination';
+import DataPick from './DataPick';
+import Search from './Search';
+import Loader from './Loader';
 
 export class Table {
   constructor(table) {
@@ -10,6 +13,7 @@ export class Table {
     this.smallSize = 32;
     this.bigSize = 1000;
     this.page = 1;
+    this.lastBody = new Map();
     this.memo = {
       str: null,
       rowsArray: null
@@ -117,10 +121,6 @@ export class Table {
     return this.filters;
   }
 
-  set lastBody (newBody) {
-    this.last = newBody;
-  }
-
   initializeEvents(data){
     data.forEach(item => {
       Array.isArray(item.elem) ?
@@ -137,7 +137,7 @@ export class Table {
     }).catch(err => fn(err));
   }
 
-  checkTagName = (el) => {
+  checkElem = (el) => {
     if (el.tagName === 'TH') this.handleThClick(el);
     if (el.tagName === 'TD') this.handleTdClick(el);
     if (el.classList.contains('js-search')) this.handleFind();
@@ -164,7 +164,7 @@ export class Table {
   getPartOfList(list, i) {
     let from = (this.maxCount * i) - this.maxCount;
     let to = this.maxCount * i;
-    let newList = list.slice(from,  to);
+    let newList = list.slice(from, to);
     return newList;
   }
 
@@ -172,10 +172,10 @@ export class Table {
     ev.preventDefault();
     this.page = i;
     let list = this.getPartOfList(this.list, this.page);
-    let tbody = this.tbodyRender(list, this.page);
+    let tbody = this.tbodyRender(list);
     let tbodyEl = this.grid.querySelector('tbody');
     this.hasBody() ? this.replace(tbodyEl, tbody) : this.add(tbody);
-    this.lastBody = tbody;
+    this.lastBody.set('body', tbody.cloneNode(true));
   }
 
   handleTdClick = (el) => {
@@ -226,17 +226,19 @@ export class Table {
   }
 
   handleClick = (ev) => {
-    this.checkTagName(ev.target);
+    this.checkElem(ev.target);
   }
 
   handleFind = (ev) => {
+    let lastBodyRows = this.lastBody.get('body');
     let input = this.container.querySelector('input');
     let tbody = this.grid.querySelector('tbody');
     if (input.value === '') {
-      this.hasBody() ? this.replace(tbody, this.last) : this.add(this.last);
+      this.hasBody() ? this.replace(tbody, this.lastBody.get('body')) :
+          this.add(this.lastBody.get('body'));
       return;
     }
-    let rows = [].slice.call(this.last.rows);
+    let rows = [].slice.call(lastBodyRows.rows);
     let filtered = this.filterMethods.byString(input.value, rows);
     this.replace(tbody, this.modifyTableBody(filtered));
   }
@@ -259,37 +261,6 @@ export class Table {
       console.log(e);
       this.grid.innerHTML = `<tr><td>${'Что-то пошло не так'}</td></tr>`;
     }
-  }
-
-  paginationRender({list, fn, step}) {
-    let pagination = new Pagination({
-      listSize: list.length,
-      handleClick: fn,
-      step: step
-    });
-    return pagination.generate();
-  }
-
-  loaderRender() {
-    let div = document.createElement('div');
-    div.style.position = 'relative';
-    let loader =
-        `<div class="loader js-loader loader--show">
-            <i class="loader__icon glyphicon glyphicon-refresh"></i>
-         </div>`;
-    div.innerHTML = loader;
-    return div;
-  }
-
-  selectDataSizeRender() {
-    let div = document.createElement('div');
-    let tmpl =
-        `<div>
-            <button data-size="small" class="btn js-data-pick">Маленький объем данных</button>
-            <button data-size="big" class="btn js-data-pick">Большой объем данных</button>
-        </div>`;
-    div.innerHTML = tmpl;
-    return div;
   }
 
   headRender(headItems){
@@ -342,26 +313,23 @@ export class Table {
     this.grid.appendChild(thead);
     this.grid.appendChild(tbody);
     this.grid.className = 'table table-hover table-bordered';
+    this.lastBody.set('body', tbody);
     return this.grid;
-  }
-  searchRender() {
-    let div = document.createElement('div');
-    let tmpl =
-        `<div class="search">
-            <input type="text" class="field" placeholder="Введите текст">
-            <button class="btn js-search" type="button">Найти</button>
-        </div>`;
-    div.innerHTML = tmpl;
-    return div;
   }
 
   render = (list) => {
      let table = this.tableRender(list);
-     let search = this.searchRender();
-     let pagination = this.paginationRender({list: list, fn: this.handleChangePage, step: this.maxCount});
+     let search = new Search();
+     let pagination = new Pagination(
+         {
+           listSize: list.length,
+           handleClick: this.handleChangePage,
+           step: this.maxCount
+         }
+         );
      this.container.append(table);
-     this.container.prepend(search);
-     this.container.append(pagination);
+     this.container.prepend(search.generate());
+     this.container.append(pagination.generate());
   }
 
 
@@ -372,14 +340,21 @@ export class Table {
   }
 
   modifyTableBody(arrRows){
-      let tableBody = document.createElement('tbody');
-      arrRows.forEach(item => tableBody.appendChild(item))
-      return tableBody;
+      let newTbody = document.createElement('tbody');
+      arrRows.forEach(
+          item => {
+            let el = item.cloneNode(true);
+            newTbody.appendChild(el);
+          }
+      )
+
+      return newTbody;
   }
 
   start = (isSmall) => {
-    let url = isSmall ? this.apiUrls.smallSize : this.apiUrls.bigSize
-    this.container.appendChild(this.loaderRender());
+    let url = isSmall ? this.apiUrls.smallSize : this.apiUrls.bigSize;
+    let loader = new Loader();
+    this.container.appendChild(loader.generate());
     this.load(url, (data) => {
       this.run(data, (list) => {
         this.toggleClass(this.container.querySelector('.js-loader'), 'loader--show');
@@ -390,12 +365,13 @@ export class Table {
   }
 
   init(){
+    let dataPick = new DataPick();
     this.initializeEvents(
         [
             {elem: this.container, eventName: 'click', fn: this.handleClick}
         ]
     );
-    this.container.appendChild(this.selectDataSizeRender());
+    this.container.appendChild(dataPick.generate());
   }
 
 }
