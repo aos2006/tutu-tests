@@ -33,7 +33,6 @@ img
 	left: 0
 	z-index: 10
 	display: none
-	background-color: rgba(0, 0, 0, .4)
 	&--show
 		display: block
 	&__icon
@@ -45,6 +44,8 @@ img
 		animation: rotate 1s linear infinite
 
 .table
+	> tr
+		cursor: pointer
 	&__cell
 		cursor: pointer
 		.up
@@ -59,6 +60,20 @@ img
 				vertical-align: middle
 .nav
 	text-align: center
+.additional-info
+	&__title
+		font-size: 20px
+	b
+		margin-left: 10px
+	p
+		margin-bottom: 10px
+		font-size: 15px
+		&:last-of-type
+			margin-bottom: 0
+	&__header
+		margin-bottom: 15px
+
+
 @keyframes rotate
 	from
 		transform: rotate(0deg)
