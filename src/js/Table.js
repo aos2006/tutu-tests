@@ -140,7 +140,13 @@ export class Table {
   checkTagName = (el) => {
     if (el.tagName === 'TH') this.handleThClick(el);
     if (el.tagName === 'TD') this.handleTdClick(el);
-    if (el.tagName === 'BUTTON') this.handleFind();
+    if (el.classList.contains('js-search')) this.handleFind();
+    if (el.classList.contains('js-data-pick')) {
+      this.handleStart(
+          el,
+          el.getAttribute('data-size') === 'small' ? true : false
+      );
+    }
   }
 
   add(el) {
@@ -235,6 +241,11 @@ export class Table {
     this.replace(tbody, this.modifyTableBody(filtered));
   }
 
+  handleStart = (el, dataSize) => {
+    el.parentNode.remove();
+    this.start(dataSize)
+  }
+
   toggleClass = (elem, className) => {
     elem.classList.toggle(className);
   }
@@ -267,6 +278,17 @@ export class Table {
             <i class="loader__icon glyphicon glyphicon-refresh"></i>
          </div>`;
     div.innerHTML = loader;
+    return div;
+  }
+
+  selectDataSizeRender() {
+    let div = document.createElement('div');
+    let tmpl =
+        `<div>
+            <button data-size="small" class="btn js-data-pick">Маленький объем данных</button>
+            <button data-size="big" class="btn js-data-pick">Большой объем данных</button>
+        </div>`;
+    div.innerHTML = tmpl;
     return div;
   }
 
@@ -327,7 +349,7 @@ export class Table {
     let tmpl =
         `<div class="search">
             <input type="text" class="field" placeholder="Введите текст">
-            <button class="btn" type="button">Найти</button>
+            <button class="btn js-search" type="button">Найти</button>
         </div>`;
     div.innerHTML = tmpl;
     return div;
@@ -355,24 +377,25 @@ export class Table {
       return tableBody;
   }
 
+  start = (isSmall) => {
+    let url = isSmall ? this.apiUrls.smallSize : this.apiUrls.bigSize
+    this.container.appendChild(this.loaderRender());
+    this.load(url, (data) => {
+      this.run(data, (list) => {
+        this.toggleClass(this.container.querySelector('.js-loader'), 'loader--show');
+        this.list = list;
+        this.render(list);
+      })
+    })
+  }
+
   init(){
     this.initializeEvents(
         [
             {elem: this.container, eventName: 'click', fn: this.handleClick}
         ]
     );
-
-    const start = () => {
-      this.container.appendChild(this.loaderRender());
-      this.load(this.apiUrls.bigSize, (data) => {
-        this.run(data, (list) => {
-          this.toggleClass(this.container.querySelector('.js-loader'), 'loader--show');
-          this.list = list;
-          this.render(list);
-        })
-      })
-    }
-    start();
+    this.container.appendChild(this.selectDataSizeRender());
   }
 
 }
