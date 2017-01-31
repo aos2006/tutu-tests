@@ -175,7 +175,7 @@ export class Table {
     let tbody = this.tbodyRender(list);
     let tbodyEl = this.grid.querySelector('tbody');
     this.hasBody() ? this.replace(tbodyEl, tbody) : this.add(tbody);
-    this.lastBody.set('body', tbody.cloneNode(true));
+    this.lastBody.set('body', tbody);
   }
 
   handleTdClick = (el) => {
@@ -209,6 +209,11 @@ export class Table {
 
   }
 
+  updateAcc = (acc, item) => {
+    acc.appendChild(item.cloneNode(true));
+    return acc;
+  }
+
   handleThClick = (el) => {
     this.toggleClass(el, 'table__cell--sort-down');
     let sortedRows = this.sortGrid({
@@ -217,7 +222,9 @@ export class Table {
       id: el.id,
       rowsArray: [].slice.call(this.gridRows),
     });
-    this.replace(this.grid.querySelector('tbody'), this.modifyTableBody(sortedRows));
+    this.replace(
+        this.grid.querySelector('tbody'),
+        this.modifyTableBody(sortedRows, this.updateAcc));
     [].forEach.call(
         this.getSiblings('.table__cell', el),
         item => {
@@ -240,7 +247,7 @@ export class Table {
     }
     let rows = [].slice.call(lastBodyRows.rows);
     let filtered = this.filterMethods.byString(input.value, rows);
-    this.replace(tbody, this.modifyTableBody(filtered));
+    this.replace(tbody, this.modifyTableBody(filtered, this.updateAcc));
   }
 
   handleStart = (el, dataSize) => {
@@ -258,7 +265,6 @@ export class Table {
     try {
       fn(list);
     } catch (e) {
-      console.log(e);
       this.grid.innerHTML = `<tr><td>${'Что-то пошло не так'}</td></tr>`;
     }
   }
@@ -281,6 +287,7 @@ export class Table {
     thead.appendChild(tr);
     return thead;
   }
+
   tbodyRender(list){
     let tbody = document.createElement('tbody');
     let td = document.createElement('td');
@@ -307,6 +314,7 @@ export class Table {
 
     return tbody;
   }
+
   tableRender(list) {
     let thead = this.headRender(this.headData);
     let tbody = this.tbodyRender(this.getPartOfList(list, this.page));
@@ -339,16 +347,8 @@ export class Table {
       return sorted;
   }
 
-  modifyTableBody(arrRows){
-      let newTbody = document.createElement('tbody');
-      arrRows.forEach(
-          item => {
-            let el = item.cloneNode(true);
-            newTbody.appendChild(el);
-          }
-      )
-
-      return newTbody;
+  modifyTableBody(arrRows, fn){
+      return arrRows.reduce(fn, document.createElement('tbody'));
   }
 
   start = (isSmall) => {
@@ -365,12 +365,16 @@ export class Table {
   }
 
   init(){
+    if (!this.container){
+      alert('В конструктор не передан элемент');
+    }
     let dataPick = new DataPick();
     this.initializeEvents(
         [
             {elem: this.container, eventName: 'click', fn: this.handleClick}
         ]
     );
+
     this.container.appendChild(dataPick.generate());
   }
 
