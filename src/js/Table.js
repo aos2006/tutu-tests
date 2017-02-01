@@ -93,7 +93,7 @@ export class Table {
       if (this.memo.str === str) {
         return this.memo.rowsArray;
       }
-      let filtered = [].filter.call(rowsArray, item => {
+      let filtered = Array.from(rowsArray).filter(item => {
         let tds = [].filter.call (item.querySelectorAll('td'), td =>
             td.textContent.indexOf (str) !== -1
         )
@@ -114,7 +114,7 @@ export class Table {
   }
 
   get gridRows() {
-    return [].slice.call(this.tableBody.rows);
+    return Array.from(this.tableBody.rows);
   }
 
   get filterMethods(){
@@ -200,6 +200,7 @@ export class Table {
               
             </header>
          </section>`;
+
     if (info) {
       info.innerHTML = additionalInfoContent;
       return;
@@ -220,14 +221,13 @@ export class Table {
       colNum: el.cellIndex,
       type: el.getAttribute('data-type'),
       id: el.id,
-      rowsArray: [].slice.call(this.gridRows),
+      rowsArray: Array.from(this.gridRows),
     });
     this.replace(
         this.grid.querySelector('tbody'),
         this.modifyTableBody(sortedRows, this.updateAcc));
-    [].forEach.call(
-        this.getSiblings('.table__cell', el),
-        item => {
+        this.getSiblings('.table__cell', el)
+            .forEach( item => {
           if (!item.classList.contains('table__cell--sort-down')) item.classList.add('table__cell--sort-down');
         });
   }
@@ -245,7 +245,7 @@ export class Table {
           this.add(this.lastBody.get('body'));
       return;
     }
-    let rows = [].slice.call(lastBodyRows.rows);
+    let rows = Array.from(lastBodyRows.rows);
     let filtered = this.filterMethods.byString(input.value, rows);
     this.replace(tbody, this.modifyTableBody(filtered, this.updateAcc));
   }
@@ -259,7 +259,8 @@ export class Table {
     elem.classList.toggle(className);
   }
 
-  getSiblings = (className, elem) => [].filter.call(document.querySelectorAll(className), item => item.id !== elem.id);
+  getSiblings = (className, elem) =>
+      Array.from(document.querySelectorAll(className)).filter(item => item.id !== elem.id);
 
   run = (list, fn) => {
     try {
